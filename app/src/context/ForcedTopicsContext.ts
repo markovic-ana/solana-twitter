@@ -1,7 +1,7 @@
 import { createContext } from 'react'
 
 export interface ForcedTopicsContextInterface {
-  forcedTopic: string
+  forcedTopic: string[]
   setForcedTopic: (c: string) => void
 }
 

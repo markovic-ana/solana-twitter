@@ -10,10 +10,8 @@ const TweetList = () => {
   const { tweets, setTweets } = useContext(TweetsContext)
   const [loading] = useState(true)
 
-  //ORDEREDLIST
-  // const orderedTweets = computed(() => {
-  //   return tweets.value.slice().sort((a, b) => b.timestamp - a.timestamp)
-  // })
+  //order tweets based on timestamp
+  const sortedTweets = [...tweets].sort((a, b) => a.timestamp - b.timestamp)
 
   return (
     <TweetsContext.Provider value={{ tweets, setTweets }}>
@@ -22,10 +20,12 @@ const TweetList = () => {
           <div className="p-8 text-gray-500 text-center">...Loading</div>
         ) : (
           <div className="divide-y">
-            {tweets.map((tw) => (
-              <Link to={`/posts/${tw.publicKey}`}>
-                <TweetCard tw={tw} key={tw.publicKey} />
-              </Link>
+            {sortedTweets.map((tw, id) => (
+              <div key={id}>
+                <Link to={`/posts/${tw.publicKey}`}>
+                  <TweetCard tw={tw} key={tw.publicKey} />
+                </Link>
+              </div>
             ))}
           </div>
         )}
